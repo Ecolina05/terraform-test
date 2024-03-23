@@ -6,18 +6,50 @@ variable "aws_profile" {
   default = "default"
 }
 
-variable "shared_credentials_file" {
-  default = "/Users/ecolina/.aws/credentials"
+variable "vpc_cidr" {
+  type = map(string)
+  default = {
+    "default" = "192.168.0.0/24"
+    "dev"     = "192.168.1.0/24"
+  }
 }
 
-variable "vpc_cidr" {
-  default = "172.30.0.0/16"
+variable "vpc_name" {
+  type = map(string)
+  default = {
+    "default" = "vpc_itm_VPC_MODULE_default"
+    "dev"     = "vpc_itm_VPC_MODULE_dev"
+  }
 }
 
 variable "subnet_1_cidr" {
-  default = "172.30.0.0/24"
+  type = map(string)
+  default = {
+    "default" = "192.168.0.0/27"
+    "dev"     = "192.168.1.0/27"
+  }
+}
+
+variable "subnet_1_name" {
+  type = map(string)
+  default = {
+    "default" = "subnet_itm_VPC_MODULE_default_1"
+    "dev"     = "subnet_itm_VPC_MODULE_dev_1"
+  }
 }
 
 variable "subnet_2_cidr" {
-  default = "172.30.1.0/24"
+  type = map(string)
+  default = {
+    "default" = "192.168.0.32/27"
+    "dev"     = "192.168.1.32/27"
+  }
+}
+
+variable "subnet_2_name" {
+  type = map(string)
+  default = {
+    "default" = "subnet_itm_VPC_MODULE_default_2"
+    "dev"     = "subnet_itm_VPC_MODULE_dev_2"
+  }
 }
