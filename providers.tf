@@ -2,7 +2,7 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 3.27"
+      version = "5.42.0"
     }
   }
   backend "local" {
@@ -11,7 +11,6 @@ terraform {
 }
 
 provider "aws" {
-  region                  = var.aws_region
-  shared_credentials_file = var.shared_credentials_file
-  profile                 = var.aws_profile
+  region                   = var.aws_region
+  profile                  = var.aws_profile
 }

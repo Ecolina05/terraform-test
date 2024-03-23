@@ -64,28 +64,33 @@ resource "aws_main_route_table_association" "RT_Association" {
   route_table_id = aws_route_table.RT-ITMIac_VSCode.id
 }
 
-resource "aws_network_acl" "NACL-ITMIac_VSCode" {
+resource "aws_network_acl" "NACL_ITMIac_VSCode" {
   vpc_id = aws_vpc.VPCITMaVSCode.id
 
   egress {
-    protocol   = "ssh"
+    protocol   = "tcp"
     rule_no    = 200
     action     = "allow"
-    cidr_block = "172.30.0.0/16"
-    from_port  = 22
-    to_port    = 22
+    cidr_block = "10.3.0.0/18"
+    from_port  = 443
+    to_port    = 443
   }
 
   ingress {
-    protocol   = "https|"
+    protocol   = "tcp"
     rule_no    = 100
     action     = "allow"
-    cidr_block = "172.30.0.0/16"
-    from_port  = 443
-    to_port    = 443
+    cidr_block = "10.3.0.0/18"
+    from_port  = 80
+    to_port    = 80
   }
 
   tags = {
     Name = "NACL-ITMIac_VSCode by terraform"
   }
+}
+
+resource "aws_network_acl_association" "NACL_Association" {
+  network_acl_id = aws_network_acl.NACL_ITMIac_VSCode.id
+  subnet_id      = aws_subnet.SUBNET_ITMIaX_1_VSCode.id
 }
